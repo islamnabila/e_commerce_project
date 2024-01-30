@@ -4,6 +4,7 @@ import 'app.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const CraftyBay ());
 }
 

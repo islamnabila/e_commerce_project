@@ -1,3 +1,4 @@
+import 'package:e_commerce_project/presentation/state_holders/category_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:e_commerce_project/presentation/ui/screens/cart_screen.dart';
 import 'package:e_commerce_project/presentation/ui/screens/home_screen.dart';
@@ -5,8 +6,11 @@ import 'package:e_commerce_project/presentation/ui/screens/wishlist_screen.dart'
 import 'package:e_commerce_project/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 
+import '../../state_holders/home_banner_controller.dart';
 import 'category_screen.dart';
 
 class MainBottomNavScreen extends StatefulWidget {
@@ -25,6 +29,11 @@ class _MainBottomNaState extends State<MainBottomNavScreen> {
     WishListScreen(),
 
   ];
+  void initState() {
+    super.initState();
+    Get.find<HomeBannerController>().getBannerList();
+    Get.find<CategoryController>().getCategoryList();
+  }
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MainBottomNavController>(

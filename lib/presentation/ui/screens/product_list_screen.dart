@@ -1,7 +1,6 @@
+import 'package:e_commerce_project/presentation/ui/widgets/product_card_item.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../state_holders/main_bottom_nav_controller.dart';
-import '../widgets/category_item.dart';
+
 
 class ProuctListScreen extends StatefulWidget {
   const ProuctListScreen({super.key,  this.category});
@@ -29,14 +28,14 @@ class _ProuctListScreenState extends State<ProuctListScreen> {
             itemCount: 20,
             gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                childAspectRatio: 0.95,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 8
+                crossAxisCount: 3,
+                childAspectRatio: 0.90,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 4,
             ),
             itemBuilder: (context, index) {
               return FittedBox(
-                  child: CategoryItem());
+                  child: ProductCardItem());
             }),
       ),
     );

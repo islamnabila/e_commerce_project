@@ -1,8 +1,7 @@
+import 'package:e_commerce_project/presentation/state_holders/category_controller.dart';
+import 'package:e_commerce_project/presentation/state_holders/home_banner_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:e_commerce_project/presentation/ui/screens/category_screen.dart';
 import 'package:e_commerce_project/presentation/ui/screens/product_list_screen.dart';
-import 'package:e_commerce_project/presentation/ui/utility/app_colors.dart';
-import 'package:e_commerce_project/presentation/ui/utility/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utility/home/style.dart';
@@ -20,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: appBar,
@@ -36,7 +36,22 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     height: 14,
                   ),
-                  ImageCarouselWidget(),
+                  SizedBox(
+                      height: 210,
+                      child: GetBuilder<HomeBannerController>(
+                          builder: (homeBannerController) {
+                        return Visibility(
+                          visible: homeBannerController.inProgress == false,
+                          replacement: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          child: ImageCarouselWidget(
+                            bannerList: homeBannerController
+                                    .bannerListModel.bannerList ??
+                                [],
+                          ),
+                        );
+                      })),
                   SizedBox(
                     height: 10,
                   ),
@@ -50,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SectionTitle(
                     title: 'Popular',
                     onTap: () {
-                      Get.to(()=> const ProuctListScreen());
+                      Get.to(() => const ProuctListScreen());
                     },
                   ),
                   productList,
@@ -80,22 +95,35 @@ class _HomeScreenState extends State<HomeScreen> {
   SizedBox get categoryList {
     return SizedBox(
       height: 120,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: 5,
-        primary: false,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          return CategoryItem();
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return SizedBox(
-            width: 10,
-          );
-        },
-      ),
+      child: GetBuilder<CategoryController>(builder: (categoryController) {
+        return Visibility(
+          visible: categoryController.inProgress == false,
+          replacement: Center(
+            child: CircularProgressIndicator(),
+          ),
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount:
+                categoryController.categoryListModel.categoryList?.length ?? 0,
+            primary: false,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return CategoryItem(
+                categoryListItem:
+                    categoryController.categoryListModel.categoryList![index],
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                width: 10,
+              );
+            },
+          ),
+        );
+      }),
     );
   }
+
   SizedBox get productList {
     return SizedBox(
       height: 200,
@@ -116,5 +144,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-

@@ -3,11 +3,16 @@ import 'package:e_commerce_project/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../data/models/banner.dart';
+
 class ImageCarouselWidget extends StatefulWidget {
+
   const ImageCarouselWidget({
-    super.key, this.height,
+    super.key, this.height, required this.bannerList,
   });
+
   final double? height;
+  final List<BannerItem> bannerList;
 
   @override
   State<ImageCarouselWidget> createState() => _ImageCarouselWidgetState();
@@ -28,18 +33,42 @@ class _ImageCarouselWidgetState extends State<ImageCarouselWidget> {
             // autoPlay: true,
             // enableInfiniteScroll: false
           ),
-          items: [1,2,3,4,5].map((i) {
+          items: widget.bannerList.map((banner) {
             return Builder(
               builder: (BuildContext context) {
-                return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 2.0),
-                    decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.circular(8)
+                return Stack(
+                  children: [
+                    Container(
+                        // width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.symmetric(horizontal: 2.0),
+                        decoration: BoxDecoration(
+                            color: AppColors.primaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                            image: NetworkImage(banner.image ?? ""),
+                          )
+                        ),
+                        alignment: Alignment.center,
+
                     ),
-                    alignment: Alignment.center,
-                    child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment :MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            child: Text(banner.title ?? "", style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white),),
+                          ),
+                          SizedBox(height: 8,),
+                          SizedBox(
+                            width:100,
+                            child: Text(banner.shortDes ?? "", style: TextStyle(fontSize: 12, fontWeight:FontWeight.w500, color: Colors.white ),),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
                 );
               },
             );
@@ -52,7 +81,7 @@ class _ImageCarouselWidgetState extends State<ImageCarouselWidget> {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for(int i = 0; i<5; i++)
+                for(int i = 0; i<widget.bannerList.length; i++)
                   Container(
                     height: 14,
                     width: 14,
