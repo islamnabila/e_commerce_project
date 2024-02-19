@@ -44,30 +44,32 @@ class _ImageCarouselWidgetState extends State<ImageCarouselWidget> {
                         decoration: BoxDecoration(
                             color: AppColors.primaryColor,
                             borderRadius: BorderRadius.circular(8),
-                          image: DecorationImage(
-                            image: NetworkImage(banner.image ?? ""),
-                          )
                         ),
                         alignment: Alignment.center,
-
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment :MainAxisAlignment.center,
+                      child: Row(
                         children: [
-                          SizedBox(
-                            width: 100,
-                            child: Text(banner.title ?? "", style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white),),
-                          ),
-                          SizedBox(height: 8,),
-                          SizedBox(
-                            width:100,
-                            child: Text(banner.shortDes ?? "", style: TextStyle(fontSize: 12, fontWeight:FontWeight.w500, color: Colors.white ),),
+                          Image.network(banner.image ?? "",height: 200, width: 200,),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment :MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 130,
+                                  child: Text(banner.title ?? "", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),),
+                                ),
+                                SizedBox(height: 8,),
+                                SizedBox(
+                                  width:130,
+                                  child: Text(banner.shortDes ?? "", style: TextStyle(fontSize: 12, fontWeight:FontWeight.w500, color: Colors.white ),),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
-                    )
+
+                    ),
                   ],
                 );
               },

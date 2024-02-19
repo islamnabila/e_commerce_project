@@ -1,14 +1,15 @@
 import 'package:e_commerce_project/presentation/state_holders/category_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:e_commerce_project/presentation/ui/screens/cart_screen.dart';
+import 'package:e_commerce_project/presentation/state_holders/new_product_controller.dart';
+import 'package:e_commerce_project/presentation/state_holders/popular_product_controller.dart';
+import 'package:e_commerce_project/presentation/state_holders/special_product_controller.dart';
+import 'package:e_commerce_project/presentation/ui/screens/cart_list_screen.dart';
 import 'package:e_commerce_project/presentation/ui/screens/home_screen.dart';
 import 'package:e_commerce_project/presentation/ui/screens/wishlist_screen.dart';
 import 'package:e_commerce_project/presentation/ui/utility/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
+
 
 import '../../state_holders/home_banner_controller.dart';
 import 'category_screen.dart';
@@ -21,18 +22,25 @@ class MainBottomNavScreen extends StatefulWidget {
 }
 
 class _MainBottomNaState extends State<MainBottomNavScreen> {
-  int _selectIndex = 0;
-  final List<Widget> _screens =[
+  // int _selectIndex = 0;
+  final List<Widget> _screens =const[
     HomeScreen(),
     CategoryScreen(),
-    CartsScreen(),
+    CartListScreen(),
     WishListScreen(),
-
   ];
+
+  @override
   void initState() {
     super.initState();
-    Get.find<HomeBannerController>().getBannerList();
-    Get.find<CategoryController>().getCategoryList();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<HomeBannerController>().getBannerList();
+      Get.find<CategoryController>().getCategoryList();
+      Get.find<PopularProductController>().getPopularProductList();
+      Get.find<SpecialProductController>().getSpecialProductList();
+      Get.find<NewProductController>().getNewProductList();
+    });
+
   }
   @override
   Widget build(BuildContext context) {
@@ -49,7 +57,7 @@ class _MainBottomNaState extends State<MainBottomNavScreen> {
 
             onTap: controller.changeIndex,
 
-            items: [
+            items:const [
               BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
               BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: "Categories"),
               BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Carts"),

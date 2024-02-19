@@ -1,9 +1,12 @@
 import 'package:e_commerce_project/presentation/state_holders/category_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/home_banner_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:e_commerce_project/presentation/ui/screens/product_list_screen.dart';
+import 'package:e_commerce_project/presentation/state_holders/new_product_controller.dart';
+import 'package:e_commerce_project/presentation/state_holders/popular_product_controller.dart';
+import 'package:e_commerce_project/presentation/state_holders/special_product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../data/models/product_model.dart';
 import '../utility/home/style.dart';
 import '../widgets/category_item.dart';
 import '../widgets/home/image_carousel.dart';
@@ -61,14 +64,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       Get.find<MainBottomNavController>().changeIndex(1);
                     },
                   ),
+
                   categoryList,
+                  SectionTitle(
+                    title: 'Brands',
+                    onTap: () {
+                      Get.find<MainBottomNavController>().changeIndex(1);
+                    },
+                  ),
+                  brandList,
                   SectionTitle(
                     title: 'Popular',
                     onTap: () {
-                      Get.to(() => const ProuctListScreen());
+                      // Get.to(() => const ProuctListScreen());
                     },
                   ),
-                  productList,
+                  GetBuilder<PopularProductController>(
+                    builder: (popularProductController) {
+                      return Visibility(
+                        visible: popularProductController.inProgress == false,
+                          replacement: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          child: productList(popularProductController.productListModel.productList ?? []));
+                    }
+                  ),
                   SizedBox(
                     height: 8,
                   ),
@@ -76,7 +96,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: 'Special',
                     onTap: () {},
                   ),
-                  productList,
+                  GetBuilder<SpecialProductController>(
+                    builder: (specialProductController) {
+                      return Visibility(
+                        visible: specialProductController.inProgress == false,
+                          replacement:const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          child: productList(specialProductController.productListModel.productList ?? []),
+                      );
+                    }
+                  ),
                   SizedBox(
                     height: 10,
                   ),
@@ -84,7 +114,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: 'New',
                     onTap: () {},
                   ),
-                  productList
+                  GetBuilder<NewProductController>(
+                    builder: (newProductController) {
+                      return Visibility(
+                        visible: newProductController.inProgress == false,
+                          replacement:const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          child: productList(newProductController.productListModel.productList ?? []));
+                    }
+                  ),
                 ],
               ),
             ),
@@ -124,16 +163,48 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  SizedBox get productList {
+  SizedBox get brandList {
+    return SizedBox(
+      height: 120,
+      child: GetBuilder<CategoryController>(builder: (categoryController) {
+        return Visibility(
+          visible: categoryController.inProgress == false,
+          replacement: Center(
+            child: CircularProgressIndicator(),
+          ),
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount:
+            categoryController.categoryListModel.categoryList?.length ?? 0,
+            primary: false,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return CategoryItem(
+                categoryListItem:
+                categoryController.categoryListModel.categoryList![index],
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                width: 10,
+              );
+            },
+          ),
+        );
+      }),
+    );
+  }
+
+  SizedBox productList(List<ProductModel> productList) {
     return SizedBox(
       height: 200,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: 5,
+        itemCount:productList.length,
         primary: false,
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return ProductCardItem();
+          return ProductCardItem(product: productList[index],);
         },
         separatorBuilder: (BuildContext context, int index) {
           return SizedBox(
@@ -143,4 +214,33 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+  // SizedBox get popularProductList {
+  //   return SizedBox(
+  //     height: 200,
+  //     child: GetBuilder<PopularProductController>(
+  //       builder: (popularProductController) {
+  //         return Visibility(
+  //           visible: popularProductController.inProgress == false,
+  //           replacement:const Center(
+  //             child: CircularProgressIndicator(),
+  //           ),
+  //           child: ListView.separated(
+  //             scrollDirection: Axis.horizontal,
+  //             itemCount: popularProductController.productListModel.productList?.length ?? 0,
+  //             primary: false,
+  //             shrinkWrap: true,
+  //             itemBuilder: (context, index) {
+  //               return ProductCardItem(product: popularProductController.productListModel.productList![index]);
+  //             },
+  //             separatorBuilder: (BuildContext context, int index) {
+  //               return SizedBox(
+  //                 width: 10,
+  //               );
+  //             },
+  //           ),
+  //         );
+  //       }
+  //     ),
+  //   );
+  // }
 }

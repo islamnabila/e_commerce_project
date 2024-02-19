@@ -18,12 +18,10 @@ class CompleteProfileController extends GetxController{
   Future<bool> createProfileData(String token, CreateProfileParams params) async{
     _inProgress =true;
     update();
-
-
     final response = await NetworkCaller().postRequest(Urls.createProfile, token: token, body: params.toJson());
     _inProgress = false;
     if(response.isSuccess){
-      await Future.delayed(const Duration(seconds: 3));
+      // await Future.delayed(const Duration(seconds: 3));
       _profile =Profile.fromJson(response.responseData["data"]);
       await Get.find<AuthController>().saveUserDetails(token, _profile);
       update();

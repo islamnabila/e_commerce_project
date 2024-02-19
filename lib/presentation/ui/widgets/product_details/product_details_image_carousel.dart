@@ -1,13 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_project/presentation/ui/utility/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsImageCarousel extends StatefulWidget {
   const ProductDetailsImageCarousel({
-    super.key, this.height,
+    super.key, this.height, required this.urls,
   });
   final double? height;
+  final List<String> urls;
 
   @override
   State<ProductDetailsImageCarousel> createState() => _ProductDetailsImageCarouselState();
@@ -28,16 +28,19 @@ class _ProductDetailsImageCarouselState extends State<ProductDetailsImageCarouse
             // autoPlay: true,
             // enableInfiniteScroll: false
           ),
-          items: [1,2,3,4,5].map((i) {
+          items: widget.urls.map((url) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         color: Colors.grey,
+                      image: DecorationImage(
+                        image: NetworkImage(url),
+                      )
                     ),
                     alignment: Alignment.center,
-                    child: Text('text $i', style: TextStyle(fontSize: 16.0),)
+
                 );
               },
             );
@@ -53,11 +56,11 @@ class _ProductDetailsImageCarouselState extends State<ProductDetailsImageCarouse
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    for(int i = 0; i<5; i++)
+                    for(int i = 0; i < widget.urls.length; i++)
                       Container(
                         height: 14,
                         width: 14,
-                        margin: EdgeInsets.all(3),
+                        margin: const EdgeInsets.all(3),
                         decoration: BoxDecoration(
                             color: i == index? AppColors.primaryColor :Colors.white,
                             border: Border.all(

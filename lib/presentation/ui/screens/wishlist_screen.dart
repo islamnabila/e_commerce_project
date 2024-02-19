@@ -1,3 +1,4 @@
+import 'package:e_commerce_project/presentation/state_holders/product_controller.dart';
 import 'package:e_commerce_project/presentation/ui/widgets/product_card_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class _WishListScreenState extends State<WishListScreen> {
               ),
               itemBuilder: (context, index) {
                 return FittedBox(
-                    child: ProductCardItem());
+                    child: ProductCardItem(product: Get.find<ProductController>().productListModel.productList![index],));
               }),
         ),
       ),

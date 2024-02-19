@@ -16,7 +16,7 @@ PreferredSize get appBar {
       actions: [
         CircleIconButton(
           onTap: () async{
-           await Get.find<AuthController>().clearAuthData();
+           await AuthController.clearAuthData();
            Get.offAll(() => VerifyEmailScreen());
           },
           iconData: Icons.person,

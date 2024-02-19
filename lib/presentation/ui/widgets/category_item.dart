@@ -7,7 +7,8 @@ import '../utility/app_colors.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({
-    super.key, required this.categoryListItem,
+    super.key,
+    required this.categoryListItem,
   });
 
   final CategoryListItem categoryListItem;
@@ -15,8 +16,13 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Get.to(()=> ProuctListScreen(category: categoryListItem.categoryName ?? ""));
+      onTap: () {
+        Get.to(
+          () => ProuctListScreen(
+            category: categoryListItem.categoryName ?? "",
+            categoryId: categoryListItem.id,
+          ),
+        );
       },
       child: Column(
         children: [
@@ -24,13 +30,16 @@ class CategoryItem extends StatelessWidget {
             elevation: 0,
             color: AppColors.primaryColor.withOpacity(0.2),
             child: Padding(
-              padding: const EdgeInsets.all(18),
-              child: Image.network(categoryListItem.categoryImg ?? "", height: 38, width: 38,)
-            ),
+                padding: const EdgeInsets.all(18),
+                child: Image.network(
+                  categoryListItem.categoryImg ?? "",
+                  height: 38,
+                  width: 38,
+                )),
           ),
           Text(
             categoryListItem.categoryName ?? "",
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: AppColors.primaryColor),

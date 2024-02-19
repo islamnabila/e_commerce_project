@@ -1,19 +1,30 @@
+import 'package:e_commerce_project/data/models/cart_item.dart';
+import 'package:e_commerce_project/presentation/state_holders/cart_list_controller.dart';
+import 'package:e_commerce_project/presentation/state_holders/delete-controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
 import '../../utility/app_colors.dart';
-import '../../utility/assets_path.dart';
+
 
 class CardProductItem extends StatefulWidget {
   CardProductItem({
-    super.key,
+    super.key, required this.cartItem,
   });
+  final CartItem cartItem;
 
   @override
   State<CardProductItem> createState() => _CardProductItemState();
 }
 
 class _CardProductItemState extends State<CardProductItem> {
-  final ValueNotifier<int> numOfNotifier = ValueNotifier(1);
+   late ValueNotifier<int> numOfItem = ValueNotifier(widget.cartItem.quantity);
+
+   @override
+  void initState() {
+    print(widget.cartItem.quantity);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +34,7 @@ class _CardProductItemState extends State<CardProductItem> {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Image.asset(AssetsPath.dummyShow, width: 100,),
+            Image.network(widget.cartItem.product?.image ?? "", width: 100,),
             SizedBox(width: 10,),
             Expanded(
               child: Column(
@@ -34,7 +45,7 @@ class _CardProductItemState extends State<CardProductItem> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Nike shoe 12ksm 2024 Edition", maxLines: 1, style: TextStyle(
+                            Text(widget.cartItem.product?.title ?? "", maxLines: 1, style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black54,
@@ -43,9 +54,9 @@ class _CardProductItemState extends State<CardProductItem> {
                             SizedBox(height: 5,),
                             Row(
                               children: [
-                                Text("Color : Red"),
+                                Text("Color : ${widget.cartItem.color ?? ""}"),
                                 SizedBox(width: 8,),
-                                Text("Size : XL")
+                                Text("Size : ${widget.cartItem.size ?? ""}")
                               ],
                             ),
 
@@ -53,20 +64,26 @@ class _CardProductItemState extends State<CardProductItem> {
                         ),
                       ),
 
-                      IconButton(onPressed: (){},
+                      IconButton(onPressed: ()async{
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context){
+                              return deleteCart;
+                            });
+                      },
                           icon: Icon(Icons.delete_forever_outlined, color: Colors.grey,))
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("\$100",style: TextStyle(
+                      Text("৳${widget.cartItem.product?.price ?? 0}",style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: AppColors.primaryColor
                       ),),
                       ValueListenableBuilder(
-                          valueListenable: numOfNotifier,
+                          valueListenable: numOfItem,
                           builder: (context, value, _) {
                             return ItemCount(
                               initialValue: value,
@@ -76,7 +93,8 @@ class _CardProductItemState extends State<CardProductItem> {
                               step: 1,
                               color: AppColors.primaryColor,
                               onChanged: (v) {
-                                numOfNotifier.value = v.toInt();
+                                numOfItem.value = v.toInt();
+                                Get.find<CartListController>().updateQuantity(widget.cartItem.id!, numOfItem.value);
                               },
                             );
                           }
@@ -90,5 +108,30 @@ class _CardProductItemState extends State<CardProductItem> {
         ),
       ),
     );
+  }
+  AlertDialog get deleteCart{
+     return AlertDialog(
+       title: const Text('Delete'),
+       content: const Text('Do you want to delete this item?'),
+       actions: [
+         TextButton(
+             onPressed: () {
+               Get.back();
+             },
+             child: const Text('No')),
+         TextButton(
+             onPressed: () async {
+               Get.find<DeleteCartListController>()
+                   .deleteCartList(widget.cartItem.productId!);
+               Get.find<CartListController>()
+                   .cartListModel
+                   .cartItemList!
+                   .clear();
+               Get.find<CartListController>().getCartList();
+               Get.back();
+             },
+             child: const Text('Yes')),
+       ],
+     );
   }
 }
