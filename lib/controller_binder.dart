@@ -1,5 +1,6 @@
 import 'package:e_commerce_project/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/auth_controller.dart';
+import 'package:e_commerce_project/presentation/state_holders/brand_list_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/cart_list_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/category_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/complete_profile_controller.dart';
@@ -41,6 +42,7 @@ class ControllerBinder extends Bindings{
     Get.put(CreateInvoiceController());
     Get.put(CreateReviewController());
     Get.put(ReviewListController());
+    Get.put(BrandListController());
   }
 
 }

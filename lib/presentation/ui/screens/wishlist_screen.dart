@@ -3,7 +3,6 @@ import 'package:e_commerce_project/presentation/ui/widgets/product_card_item.dar
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../state_holders/main_bottom_nav_controller.dart';
 
