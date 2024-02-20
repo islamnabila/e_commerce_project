@@ -8,7 +8,7 @@ import '../../utility/app_colors.dart';
 
 
 class CardProductItem extends StatefulWidget {
-  CardProductItem({
+  const CardProductItem({
     super.key, required this.cartItem,
   });
   final CartItem cartItem;
@@ -22,7 +22,6 @@ class _CardProductItemState extends State<CardProductItem> {
 
    @override
   void initState() {
-    print(widget.cartItem.quantity);
     super.initState();
   }
 
@@ -35,7 +34,7 @@ class _CardProductItemState extends State<CardProductItem> {
         child: Row(
           children: [
             Image.network(widget.cartItem.product?.image ?? "", width: 100,),
-            SizedBox(width: 10,),
+            const SizedBox(width: 10,),
             Expanded(
               child: Column(
                 children: [
@@ -45,17 +44,17 @@ class _CardProductItemState extends State<CardProductItem> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(widget.cartItem.product?.title ?? "", maxLines: 1, style: TextStyle(
+                            Text(widget.cartItem.product?.title ?? "", maxLines: 1, style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black54,
                                 overflow: TextOverflow.ellipsis
                             ),),
-                            SizedBox(height: 5,),
+                            const SizedBox(height: 5,),
                             Row(
                               children: [
                                 Text("Color : ${widget.cartItem.color ?? ""}"),
-                                SizedBox(width: 8,),
+                                const SizedBox(width: 8,),
                                 Text("Size : ${widget.cartItem.size ?? ""}")
                               ],
                             ),
@@ -71,13 +70,13 @@ class _CardProductItemState extends State<CardProductItem> {
                               return deleteCart;
                             });
                       },
-                          icon: Icon(Icons.delete_forever_outlined, color: Colors.grey,))
+                          icon: const Icon(Icons.delete_forever_outlined, color: Colors.grey,))
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("৳${widget.cartItem.product?.price ?? 0}",style: TextStyle(
+                      Text("৳${widget.cartItem.product?.price ?? 0}",style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: AppColors.primaryColor

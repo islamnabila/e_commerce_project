@@ -19,8 +19,8 @@ class BrandListModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['msg'] = msg;
-    if (this.brandList != null) {
-      data['data'] = this.brandList!.map((v) => v.toJson()).toList();
+    if (brandList != null) {
+      data['data'] = brandList!.map((v) => v.toJson()).toList();
     }
     return data;
   }

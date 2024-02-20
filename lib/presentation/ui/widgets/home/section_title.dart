@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SectionTitle extends StatelessWidget {
@@ -13,8 +12,8 @@ class SectionTitle extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-        TextButton(onPressed: onTap, child: Text("See All"))
+        Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
+        TextButton(onPressed: onTap, child: const Text("See All"))
       ],
     );
   }

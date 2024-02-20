@@ -14,7 +14,7 @@ class ProductDetailsImageCarousel extends StatefulWidget {
 }
 
 class _ProductDetailsImageCarouselState extends State<ProductDetailsImageCarousel> {
-  ValueNotifier<int> _currentIndex = ValueNotifier(0);
+  final ValueNotifier<int> _currentIndex = ValueNotifier(0);
   @override
   Widget build(BuildContext context) {
     return Stack(

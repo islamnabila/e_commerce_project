@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class ColorsSelector extends StatefulWidget {
@@ -40,7 +39,7 @@ class _ColorsSelectorState extends State<ColorsSelector> {
             child: CircleAvatar(
               radius: 15,
               backgroundColor: c,
-              child: _selectedColors == c ? Icon(Icons.done) : null,
+              child: _selectedColors == c ? const Icon(Icons.done) : null,
             ),
           ),
         ))

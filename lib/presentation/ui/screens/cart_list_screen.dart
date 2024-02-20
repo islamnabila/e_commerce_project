@@ -32,9 +32,9 @@ class _CartListScreenState extends State<CartListScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Carts"),
+          title: const Text("Carts"),
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
               color: Colors.black,
             ),
@@ -46,7 +46,7 @@ class _CartListScreenState extends State<CartListScreen> {
         body: GetBuilder<CartListController>(
           builder: (cartListController) {
             if(cartListController.inProgress){
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -58,7 +58,7 @@ class _CartListScreenState extends State<CartListScreen> {
                       itemBuilder: (context, index){
                         return CardProductItem(cartItem: cartListController.cartListModel.cartItemList![index]);
                       },
-                      separatorBuilder: (_, __) => SizedBox(
+                      separatorBuilder: (_, __) => const SizedBox(
                         height: 8,
                       ) ,)
                 ),
@@ -73,10 +73,10 @@ class _CartListScreenState extends State<CartListScreen> {
 
   Container totalPriceandCheckoutSection(RxDouble totalPrice) {
     return Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
                 color: AppColors.primaryColor.withOpacity(0.2),
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16))),
             child: Row(
@@ -85,7 +85,7 @@ class _CartListScreenState extends State<CartListScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Total Price",
                       style: TextStyle(
                           fontSize: 16,
@@ -95,7 +95,7 @@ class _CartListScreenState extends State<CartListScreen> {
                     Obx(()=>
                        Text(
                         "৳$totalPrice",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
                             color: AppColors.primaryColor),
@@ -107,9 +107,9 @@ class _CartListScreenState extends State<CartListScreen> {
                   width: 100,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.to(()=> CheckoutScreen());
+                      Get.to(()=> const CheckoutScreen());
                     },
-                    child: Text("Check Out"),
+                    child: const Text("Check Out"),
                   ),
                 )
               ],

@@ -37,7 +37,7 @@ class _SizeSelectorState extends State<SizeSelector> {
           },
           child: Container(
               padding: const EdgeInsets.all(8),
-              margin: EdgeInsets.only(right: 12),
+              margin: const EdgeInsets.only(right: 12),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
                   border: Border.all(color: Colors.grey),

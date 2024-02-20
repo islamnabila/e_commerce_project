@@ -23,13 +23,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: Text(
+          title: const Text(
             "Category",
             style: TextStyle(
                 color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
               color: Colors.black,
             ),
@@ -48,14 +48,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
             child: GetBuilder<CategoryController>(builder: (categoryController) {
               return Visibility(
                 visible: categoryController.inProgress == false,
-                replacement: Center(
+                replacement: const Center(
                   child: CircularProgressIndicator(),
                 ),
                 child: GridView.builder(
                     itemCount: categoryController
                             .categoryListModel.categoryList?.length ??
                         0,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
                         childAspectRatio: 0.95,
                         mainAxisSpacing: 12,

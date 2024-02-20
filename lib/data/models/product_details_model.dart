@@ -19,8 +19,8 @@ class ProductDetailsModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['msg'] = msg;
-    if (this.productDetailsDataList != null) {
-      data['data'] = this.productDetailsDataList!.map((v) => v.toJson()).toList();
+    if (productDetailsDataList != null) {
+      data['data'] = productDetailsDataList!.map((v) => v.toJson()).toList();
     }
     return data;
   }

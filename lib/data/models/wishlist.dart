@@ -23,18 +23,18 @@ class Wishlist {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     product =
-    json['product'] != null ? new ProductModel.fromJson(json['product']) : null;
+    json['product'] != null ? ProductModel.fromJson(json['product']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['product_id'] = this.productId;
-    data['user_id'] = this.userId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.product != null) {
-      data['product'] = this.product!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['product_id'] = productId;
+    data['user_id'] = userId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (product != null) {
+      data['product'] = product!.toJson();
     }
     return data;
   }

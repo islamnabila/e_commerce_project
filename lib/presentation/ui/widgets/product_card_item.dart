@@ -33,7 +33,7 @@ class ProductCardItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(16),
                       topLeft: Radius.circular(16)),
                   child: Image.network(
@@ -50,7 +50,7 @@ class ProductCardItem extends StatelessWidget {
                       product.title ?? "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                         color: Colors.black54,
@@ -61,31 +61,31 @@ class ProductCardItem extends StatelessWidget {
                       children: [
                         Text(
                           "৳${product.price ?? 0}",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
                               color: AppColors.primaryColor),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8,
                         ),
                         Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.star,
                               size: 14,
                               color: Colors.amberAccent,
                             ),
                             Text(
-                              "${product.star ?? 0}", style: TextStyle(
+                              "${product.star ?? 0}", style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black45),
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8,
                         ),
                         Card(
@@ -93,8 +93,8 @@ class ProductCardItem extends StatelessWidget {
                               borderRadius: BorderRadius.circular(4),
                             ),
                             color: AppColors.primaryColor,
-                            child: Padding(
-                              padding: const EdgeInsets.all(2),
+                            child: const Padding(
+                              padding: EdgeInsets.all(2),
                               child: Icon(
                                 Icons.favorite_outline,
                                 size: 10,

@@ -3,6 +3,7 @@ import 'package:e_commerce_project/data/models/profile.dart';
 import 'package:e_commerce_project/data/services/network_caller.dart';
 import 'package:e_commerce_project/presentation/state_holders/auth_controller.dart';
 import 'package:get/get.dart';
+import '../../data/models/product_review_data.dart';
 import '../../data/utility/urls.dart';
 
 class CompleteProfileController extends GetxController{

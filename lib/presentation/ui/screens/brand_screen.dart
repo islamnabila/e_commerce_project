@@ -1,11 +1,9 @@
 import 'package:e_commerce_project/presentation/state_holders/brand_list_controller.dart';
-import 'package:e_commerce_project/presentation/state_holders/category_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:e_commerce_project/presentation/ui/widgets/category_brand_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widgets/category_item.dart';
 
 class BrandScreen extends StatefulWidget {
   const BrandScreen({super.key});
@@ -25,13 +23,13 @@ class _BrandScreenState extends State<BrandScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: Text(
+          title: const Text(
             "Brands",
             style: TextStyle(
                 color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_ios,
               color: Colors.black,
             ),
@@ -46,14 +44,14 @@ class _BrandScreenState extends State<BrandScreen> {
           child: GetBuilder<BrandListController>(builder: (brandListController) {
             return Visibility(
               visible: brandListController.inProgress == false,
-              replacement: Center(
+              replacement: const Center(
                 child: CircularProgressIndicator(),
               ),
               child: GridView.builder(
                   itemCount: brandListController
                       .brandListModel.brandList?.length ??
                       0,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 4,
                       childAspectRatio: 0.95,
                       mainAxisSpacing: 12,

@@ -25,7 +25,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
             key: _formKey,
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 160,
                 ),
                 Image.asset(
@@ -33,24 +33,24 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   width: MediaQuery.of(context).size.height * 0.1,
                   height: 80,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Text("Welcome Back",
                     style: Theme.of(context).textTheme.titleLarge),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
                   "Please Enter Your Email Address",
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(hintText: "Email Address"),
+                    decoration: const InputDecoration(hintText: "Email Address"),
                     validator: (String? value) {
                       if (value?.trim().isEmpty ?? true) {
                         return "Enter your email";
@@ -65,7 +65,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                         return null;
                       }
                     }),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 GetBuilder<SendEmailOtpController>(builder: (controller) {

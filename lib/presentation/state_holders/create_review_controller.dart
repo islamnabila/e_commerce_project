@@ -1,4 +1,3 @@
-import 'package:e_commerce_project/data/models/review_list_model.dart';
 import 'package:e_commerce_project/data/services/network_caller.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 

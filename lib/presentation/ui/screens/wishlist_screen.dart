@@ -30,13 +30,13 @@ class _WishListScreenState extends State<WishListScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          title: Text(
+          title: const Text(
             "Wishlist",
             style: TextStyle(
                 color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold),
           ),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, color: Colors.black,),
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.black,),
             onPressed: (){
               Get.find<MainBottomNavController>().backToHome();
             },
@@ -46,13 +46,13 @@ class _WishListScreenState extends State<WishListScreen> {
         body: GetBuilder<WishlistController>(
           builder: (wishlistController) {
             if(wishlistController.inProgress){
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
             return Visibility(
               visible: wishlistController.wishlistModel.wishlist?.isNotEmpty ?? false,
-              replacement: Center(
+              replacement: const Center(
                 child: Text("Wishlist  is empty"),
               ),
               child: Padding(
@@ -60,7 +60,7 @@ class _WishListScreenState extends State<WishListScreen> {
                 child: GridView.builder(
                     itemCount: wishlistController.wishlistModel.wishlist?.length ?? 0,
                     gridDelegate:
-                    SliverGridDelegateWithFixedCrossAxisCount(
+                    const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         childAspectRatio: 0.90,
                         mainAxisSpacing: 8,

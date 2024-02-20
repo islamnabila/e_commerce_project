@@ -27,20 +27,20 @@ class ProductReviewData {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     profile =
-    json['profile'] != null ? new Profile.fromJson(json['profile']) : null;
+    json['profile'] != null ? Profile.fromJson(json['profile']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['description'] = this.description;
-    data['rating'] = this.rating;
-    data['customer_id'] = this.customerId;
-    data['product_id'] = this.productId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    if (this.profile != null) {
-      data['profile'] = this.profile!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['description'] = description;
+    data['rating'] = rating;
+    data['customer_id'] = customerId;
+    data['product_id'] = productId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    if (profile != null) {
+      data['profile'] = profile!.toJson();
     }
     return data;
   }
@@ -58,9 +58,9 @@ class Profile {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['cus_name'] = this.cusName;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['cus_name'] = cusName;
     return data;
   }
 }

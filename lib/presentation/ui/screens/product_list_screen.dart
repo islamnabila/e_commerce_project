@@ -29,7 +29,7 @@ class _ProuctListScreenState extends State<ProuctListScreen> {
         title: Text(
           widget.category ?? "Products",
         ),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -42,12 +42,12 @@ class _ProuctListScreenState extends State<ProuctListScreen> {
               ),
               child: Visibility(
                 visible: productController.productListModel.productList?. isNotEmpty ?? false,
-                replacement: Center(
+                replacement: const Center(
                   child: Text("No Products"),
                 ),
                 child: GridView.builder(
                     itemCount:  productController.productListModel.productList?.length ?? 0,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       childAspectRatio: 0.90,
                       mainAxisSpacing: 8,

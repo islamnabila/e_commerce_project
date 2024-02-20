@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_project/presentation/ui/utility/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/models/banner.dart';
@@ -19,7 +18,7 @@ class ImageCarouselWidget extends StatefulWidget {
 }
 
 class _ImageCarouselWidgetState extends State<ImageCarouselWidget> {
-  ValueNotifier<int> _currentIndex = ValueNotifier(0);
+  final ValueNotifier<int> _currentIndex = ValueNotifier(0);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,7 +39,7 @@ class _ImageCarouselWidgetState extends State<ImageCarouselWidget> {
                   children: [
                     Container(
                         // width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.symmetric(horizontal: 2.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 2.0),
                         decoration: BoxDecoration(
                             color: AppColors.primaryColor,
                             borderRadius: BorderRadius.circular(8),
@@ -56,12 +55,12 @@ class _ImageCarouselWidgetState extends State<ImageCarouselWidget> {
                               children: [
                                 SizedBox(
                                   width: 130,
-                                  child: Text(banner.title ?? "", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),),
+                                  child: Text(banner.title ?? "", style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),),
                                 ),
-                                SizedBox(height: 8,),
+                                const SizedBox(height: 8,),
                                 SizedBox(
                                   width:130,
-                                  child: Text(banner.shortDes ?? "", style: TextStyle(fontSize: 12, fontWeight:FontWeight.w500, color: Colors.white ),),
+                                  child: Text(banner.shortDes ?? "", style: const TextStyle(fontSize: 12, fontWeight:FontWeight.w500, color: Colors.white ),),
                                 )
                               ],
                             ),
@@ -76,7 +75,7 @@ class _ImageCarouselWidgetState extends State<ImageCarouselWidget> {
             );
           }).toList(),
         ),
-        SizedBox(height: 6,),
+        const SizedBox(height: 6,),
         ValueListenableBuilder(
           valueListenable: _currentIndex,
           builder: (context, index, _) {
@@ -87,7 +86,7 @@ class _ImageCarouselWidgetState extends State<ImageCarouselWidget> {
                   Container(
                     height: 14,
                     width: 14,
-                    margin: EdgeInsets.all(3),
+                    margin: const EdgeInsets.all(3),
                     decoration: BoxDecoration(
                         color: i == index? AppColors.primaryColor :Colors.white,
                       border: Border.all(

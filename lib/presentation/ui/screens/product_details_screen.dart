@@ -41,7 +41,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(AuthController.token);
     Get.find<ProductDetailsController>().getProductDetails(widget.productId);
   }
 
@@ -49,13 +48,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Product_details"),
-        iconTheme: IconThemeData(color: Colors.black),
+        title: const Text("Product_details"),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: GetBuilder<ProductDetailsController>(
         builder: (productDetailsController) {
           if(productDetailsController.inProgress){
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -96,7 +95,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               Expanded(
                   child: Text(
                 productDetailsData.product?.title ?? "",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               )),
               ValueListenableBuilder(
                   valueListenable: numOfItems,
@@ -122,7 +121,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           const SizedBox(
             height: 16,
           ),
-          Text(
+          const Text(
             "Color",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
@@ -137,7 +136,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           const SizedBox(
             height: 16,
           ),
-          Text(
+          const Text(
             "Size",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
@@ -150,16 +149,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           const SizedBox(
             height: 8,
           ),
-          Text(
+          const Text(
             "Description",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Text(
             productDetailsData.des ?? "",
-            style: TextStyle(fontSize: 12, color: Colors.grey),
+            style: const TextStyle(fontSize: 12, color: Colors.grey),
           )
         ],
       ),
@@ -173,14 +172,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.star,
                   size: 16,
                   color: Colors.amberAccent,
                 ),
                 Text(
                   rating.toStringAsPrecision(2),
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: Colors.black45),
@@ -194,7 +193,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               onTap: (){
                 Get.to(()=>CreateReviewScreen(productId: widget.productId,));
               },
-              child: Text(
+              child: const Text(
                 "Reviews",
                 style: TextStyle(
                     fontSize: 16,
@@ -209,7 +208,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               onTap: ()async{
                final bool result = await Get.find<CreateWishListController>().createWishList(widget.productId);
                if(result){
-                 Get.showSnackbar(GetSnackBar(
+                 Get.showSnackbar(const GetSnackBar(
                    title: "Success!",
                    message: "Product added successfully",
                    isDismissible: true,
@@ -220,7 +219,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                    title: "Failed!",
                    message: Get.find<CreateWishListController>().errorMessage,
                    isDismissible: true,
-                   duration: Duration(seconds: 2),
+                   duration: const Duration(seconds: 2),
                  ));
                }
               },
@@ -229,8 +228,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   color: AppColors.primaryColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(4),
+                  child: const Padding(
+                    padding: EdgeInsets.all(4),
                     child: Icon(
                       Icons.favorite_outline,
                       size: 18,
@@ -244,10 +243,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   Container get priceandAddtoCartSection {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
           color: AppColors.primaryColor.withOpacity(0.2),
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(16), topRight: Radius.circular(16))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -255,7 +254,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Price",
                 style: TextStyle(
                     fontSize: 16,
@@ -264,7 +263,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               Text(
                 '\$${Get.find<ProductDetailsController>().productDetailsData.product?.price ?? 0}',
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: AppColors.primaryColor),
@@ -286,9 +285,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         if(Get.find<AuthController>().isTokenNotNull){
                           final stringColor = colorsToString(_selectedColor!);
                         final response = await addCartToController.getAddToCart(widget.productId , stringColor, _selectedSize!, numOfItems.value);
-                        print(AuthController.token);
                         if(response){
-                          Get.showSnackbar(GetSnackBar(
+                          Get.showSnackbar(const GetSnackBar(
                             title: "Success",
                             message: "This product has been added to cart",
                             duration: Duration(seconds: 2),
@@ -298,15 +296,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           Get.showSnackbar(GetSnackBar(
                             title: " Add to cart failed",
                             message: addCartToController.errorMessage,
-                            duration: Duration(seconds: 2),
+                            duration: const Duration(seconds: 2),
                           ));
                         }
                         }else{
-                          Get.to(()=> VerifyEmailScreen());
+                          Get.to(()=> const VerifyEmailScreen());
                         }
 
                       }else{
-                        Get.showSnackbar(GetSnackBar(
+                        Get.showSnackbar(const GetSnackBar(
                           title: "Add to cart failed!",
                           message: "Plese select color and size",
                           duration: Duration(seconds: 2),
@@ -314,7 +312,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ));
                       }
                     },
-                    child: Text("Add To Cart"),
+                    child: const Text("Add To Cart"),
                   ),
                 );
               }

@@ -1,9 +1,8 @@
 import 'dart:convert';
-
-import 'package:e_commerce_project/data/models/profile.dart';
 import 'package:e_commerce_project/presentation/ui/screens/auth/verify_email_screen.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../data/models/product_review_data.dart';
 
 class AuthController extends GetxController {
   static String? token;
