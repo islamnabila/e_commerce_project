@@ -1,10 +1,10 @@
 import 'package:e_commerce_project/data/models/product_details_data.dart';
 import 'package:e_commerce_project/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/auth_controller.dart';
+import 'package:e_commerce_project/presentation/state_holders/create_wishlist_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/product_details_controller.dart';
 import 'package:e_commerce_project/presentation/ui/screens/auth/verify_email_screen.dart';
 import 'package:e_commerce_project/presentation/ui/screens/create_review_screen.dart';
-import 'package:e_commerce_project/presentation/ui/screens/wishlist_screen.dart';
 import 'package:e_commerce_project/presentation/ui/widgets/product_details/product_details_image_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -206,8 +206,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               width: 8,
             ),
             GestureDetector(
-              onTap: (){
-                Get.to(()=>WishListScreen());
+              onTap: ()async{
+               final bool result = await Get.find<CreateWishListController>().createWishList(widget.productId);
+               if(result){
+                 Get.showSnackbar(GetSnackBar(
+                   title: "Success!",
+                   message: "Product added successfully",
+                   isDismissible: true,
+                   duration: Duration(seconds: 2),
+                 ));
+               }else{
+                 Get.showSnackbar(GetSnackBar(
+                   title: "Failed!",
+                   message: Get.find<CreateWishListController>().errorMessage,
+                   isDismissible: true,
+                   duration: Duration(seconds: 2),
+                 ));
+               }
               },
               child: Card(
                   shape: RoundedRectangleBorder(
@@ -248,7 +263,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     color: Colors.black45),
               ),
               Text(
-                "12056334",
+                '\$${Get.find<ProductDetailsController>().productDetailsData.product?.price ?? 0}',
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

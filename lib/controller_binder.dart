@@ -6,6 +6,7 @@ import 'package:e_commerce_project/presentation/state_holders/category_controlle
 import 'package:e_commerce_project/presentation/state_holders/complete_profile_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/create_invoice_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/create_review_controller.dart';
+import 'package:e_commerce_project/presentation/state_holders/create_wishlist_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/delete-controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/home_banner_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/main_bottom_nav_controller.dart';
@@ -18,6 +19,7 @@ import 'package:e_commerce_project/presentation/state_holders/review_list_contro
 import 'package:e_commerce_project/presentation/state_holders/send_email_otp_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/special_product_controller.dart';
 import 'package:e_commerce_project/presentation/state_holders/verify_otp_controller.dart';
+import 'package:e_commerce_project/presentation/state_holders/wishlist_controller.dart';
 import 'package:get/get.dart';
 
 class ControllerBinder extends Bindings{
@@ -43,6 +45,8 @@ class ControllerBinder extends Bindings{
     Get.put(CreateReviewController());
     Get.put(ReviewListController());
     Get.put(BrandListController());
+    Get.put(CreateWishListController());
+    Get.put(WishlistController());
   }
 
 }

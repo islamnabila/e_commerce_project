@@ -30,4 +30,6 @@ class Urls {
   static String createReview = "$_baseurl/CreateProductReview";
   static String reviewList (int productId) =>"$_baseurl/ListReviewByProduct/$productId";
   static String brandList = "$_baseurl/BrandList";
+  static String createWishlist(int productId) => "$_baseurl/CreateWishList/$productId";
+  static String wishlist = "$_baseurl/ProductWishList";
 }

@@ -1,10 +1,16 @@
-import 'package:e_commerce_project/data/models/create_profile_params.dart';
-import 'package:e_commerce_project/presentation/state_holders/complete_profile_controller.dart';
-import 'package:e_commerce_project/presentation/state_holders/verify_otp_controller.dart';
-import 'package:e_commerce_project/presentation/ui/screens/main_bottom_nav_screen.dart';
-import 'package:e_commerce_project/presentation/ui/utility/assets_path.dart';
+
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../../data/models/create_profile_params.dart';
+import '../../../state_holders/complete_profile_controller.dart';
+import '../../../state_holders/verify_otp_controller.dart';
+import '../../utility/assets_path.dart';
+import '../main_bottom_nav_screen.dart';
+
+
 
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({super.key});
@@ -14,171 +20,344 @@ class CompleteProfileScreen extends StatefulWidget {
 }
 
 class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
-  final TextEditingController _firstNameComtroller = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _mobileCOntroller = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
-  final TextEditingController _shippingAddressController =
-      TextEditingController();
-
+  final TextEditingController _nameTEController = TextEditingController();
+  final TextEditingController _addressTEController = TextEditingController();
+  final TextEditingController _cityTEController = TextEditingController();
+  final TextEditingController _stateTEController = TextEditingController();
+  final TextEditingController _postCodeTEController = TextEditingController();
+  final TextEditingController _countryTEController = TextEditingController();
+  final TextEditingController _phoneTEController = TextEditingController();
+  final TextEditingController _faxTEController = TextEditingController();
+  final TextEditingController _shipNameTEController = TextEditingController();
+  final TextEditingController _shipAddressTEController = TextEditingController();
+  final TextEditingController _shipCityTEController = TextEditingController();
+  final TextEditingController _shipStateTEController = TextEditingController();
+  final TextEditingController _shipPostCodeTEController = TextEditingController();
+  final TextEditingController _shipCountryTEController = TextEditingController();
+  final TextEditingController _shipPhoneTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Form(
-                key: _formKey,
-                child: Column(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(42),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const SizedBox(height: 80),
+               Image.asset(AssetsPath.logo,
+              width: MediaQuery.of(context).size.height * 0.1,),
+                const SizedBox(height: 10),
+                Text(
+                  'Complete Profile',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Text(
+                  'Get started with us with your details',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                TextFormField(
+                  controller: _nameTEController,
+                  textInputAction: TextInputAction.next,
+                  decoration: const InputDecoration(labelText: 'Full Name'),
+                  validator: (value) {
+                    if (value!.trim().isEmpty) {
+                      return 'Enter full Name';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  maxLines: 2,
+                  controller: _addressTEController,
+                  textInputAction: TextInputAction.next,
+                  decoration: const InputDecoration(labelText: 'Address'),
+                  validator: (value) {
+                    if (value!.trim().isEmpty) {
+                      return 'Enter Address';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                Row(
                   children: [
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Image.asset(
-                      AssetsPath.logo,
-                      width: MediaQuery.of(context).size.height * 0.1,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text("Complete Profile",
-                        style: Theme.of(context).textTheme.titleLarge),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Get started with us with your details",
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                        controller: _firstNameComtroller,
-                        decoration: InputDecoration(hintText: "First Name"),
+                    Expanded(
+                      child: TextFormField(
+                        controller: _cityTEController,
                         textInputAction: TextInputAction.next,
-                        validator: (String? value) {
-                          if (value?.trim().isEmpty ?? true) {
-                            return "Enter first name";
-                          } else {
-                            return null;
+                        decoration: const InputDecoration(labelText: 'City'),
+                        validator: (value) {
+                          if (value!.trim().isEmpty) {
+                            return 'Enter City Name';
                           }
-                        }),
-                    SizedBox(
-                      height: 15,
+                          return null;
+                        },
+                      ),
                     ),
-                    TextFormField(
-                        controller: _lastNameController,
-                        decoration: InputDecoration(hintText: "Last Name"),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextFormField(
+                        controller: _stateTEController,
                         textInputAction: TextInputAction.next,
-                        validator: (String? value) {
-                          if (value?.trim().isEmpty ?? true) {
-                            return "Enter last name";
-                          } else {
-                            return null;
+                        decoration: const InputDecoration(labelText: 'State'),
+                        validator: (value) {
+                          if (value!.trim().isEmpty) {
+                            return 'Enter State';
                           }
-                        }),
-                    SizedBox(
-                      height: 15,
+                          return null;
+                        },
+                      ),
                     ),
-                    TextFormField(
-                        controller: _mobileCOntroller,
-                        decoration: InputDecoration(hintText: "Mobile"),
-                        keyboardType: TextInputType.phone,
-                        textInputAction: TextInputAction.next,
-                        validator: (String? value) {
-                          if (value?.trim().isEmpty ?? true) {
-                            return "Enter mobile number";
-                          } else {
-                            return null;
-                          }
-                        }),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                        controller: _cityController,
-                        decoration: InputDecoration(hintText: "City"),
-                        textInputAction: TextInputAction.next,
-                        validator: (String? value) {
-                          if (value?.trim().isEmpty ?? true) {
-                            return "Enter your city";
-                          } else {
-                            return null;
-                          }
-                        }),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                        controller: _shippingAddressController,
-                        maxLines: 4,
-                        decoration:
-                            InputDecoration(hintText: "Shopping Address"),
-                        validator: (String? value) {
-                          if (value?.trim().isEmpty ?? true) {
-                            return "Enter your shipping address";
-                          } else {
-                            return null;
-                          }
-                        }),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: GetBuilder<CompleteProfileController>(
-                          builder: (completeProfileController) {
-                        return Visibility(
-                          visible:
-                              completeProfileController.inProgress == false,
-                          replacement: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                          child: ElevatedButton(
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  final createProfileParams =
-                                      CreateProfileParams(
-                                    firstName: _firstNameComtroller.text.trim(),
-                                    lastName: _lastNameController.text.trim(),
-                                    mobile: _mobileCOntroller.text.trim(),
-                                    city: _cityController.text.trim(),
-                                    shippingAddress:
-                                        _shippingAddressController.text.trim(),
-                                  );
-                                  final bool result =
-                                      await completeProfileController
-                                          .createProfileData(
-                                              Get.find<VerifyOtpController>()
-                                                  .token,
-                                              createProfileParams);
-                                  if (result) {
-                                    Get.offAll(() => MainBottomNavScreen());
-                                  } else {
-                                    Get.showSnackbar(GetSnackBar(
-                                      title: "Complete Profile failed!",
-                                      message: completeProfileController
-                                          .errorMessage,
-                                      duration: Duration(seconds: 2),
-                                      isDismissible: true,
-                                    ));
-                                  }
-                                }
-                              },
-                              child: Text("Complete")),
-                        );
-                      }),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    )
                   ],
                 ),
-              ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: _postCodeTEController,
+                        textInputAction: TextInputAction.next,
+                        decoration:
+                        const InputDecoration(labelText: 'Post code'),
+                        validator: (value) {
+                          if (value!.trim().isEmpty) {
+                            return 'Enter post code';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      flex: 5,
+                      child: TextFormField(
+                        controller: _countryTEController,
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(labelText: 'Country'),
+                        validator: (value) {
+                          if (value!.trim().isEmpty) {
+                            return 'Enter country';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _phoneTEController,
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                      labelText: 'Mobile', hintText: '01XXXXXX245'),
+                  validator: (value) {
+                    if (value!.trim().isEmpty) {
+                      return 'Enter phone number';
+                    } else if (RegExp(r"^(?:(?:\+|00)88|01)?\d{11}$")
+                        .hasMatch(value)) {
+                      return null;
+                    }
+
+                    return 'Enter valid 11 digit number';
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _faxTEController,
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                      labelText: 'Fax', hintText: '01XXXXXX245'),
+                  validator: (value) {
+                    if (value!.trim().isEmpty) {
+                      return 'Enter fax number';
+                    } else if (RegExp(r"^(?:(?:\+|00)88|01)?\d{11}$")
+                        .hasMatch(value)) {
+                      return null;
+                    }
+
+                    return 'Enter valid 11 digit number';
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _shipNameTEController,
+                  textInputAction: TextInputAction.next,
+                  decoration: const InputDecoration(labelText: 'Shipper Name'),
+                  validator: (value) {
+                    if (value!.trim().isEmpty) {
+                      return 'Enter shipper Name';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _shipAddressTEController,
+                  textInputAction: TextInputAction.next,
+                  maxLines: 2,
+                  decoration:
+                  const InputDecoration(labelText: 'Shipping Address'),
+                  validator: (value) {
+                    if (value!.trim().isEmpty) {
+                      return 'Enter Shipping Address';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: _shipCityTEController,
+                        textInputAction: TextInputAction.next,
+                        decoration:
+                        const InputDecoration(labelText: 'Ship city'),
+                        validator: (value) {
+                          if (value!.trim().isEmpty) {
+                            return 'Enter ship city name';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextFormField(
+                        controller: _shipStateTEController,
+                        textInputAction: TextInputAction.next,
+                        decoration:
+                        const InputDecoration(labelText: 'Ship state'),
+                        validator: (value) {
+                          if (value!.trim().isEmpty) {
+                            return 'Enter ship state';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: _shipPostCodeTEController,
+                        textInputAction: TextInputAction.next,
+                        decoration:
+                        const InputDecoration(labelText: 'Ship postcode'),
+                        validator: (value) {
+                          if (value!.trim().isEmpty) {
+                            return 'Enter ship postcode';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      flex: 5,
+                      child: TextFormField(
+                        controller: _shipCountryTEController,
+                        textInputAction: TextInputAction.done,
+                        decoration:
+                        const InputDecoration(labelText: 'Ship country'),
+                        validator: (value) {
+                          if (value!.trim().isEmpty) {
+                            return 'Enter country';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _shipPhoneTEController,
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                      labelText: 'ship phone', hintText: '01XXXXXX245'),
+                  validator: (value) {
+                    if (value!.trim().isEmpty) {
+                      return 'Enter ship phone number';
+                    } else if (RegExp(r"^(?:(?:\+|00)88|01)?\d{11}$")
+                        .hasMatch(value)) {
+                      return null;
+                    }
+
+                    return 'Enter valid 11 digit number';
+                  },
+                ),
+                const SizedBox(height: 16),
+                GetBuilder<CompleteProfileController>(builder: (controller) {
+                  return SizedBox(
+                    width: double.infinity,
+                    child: Visibility(
+                      visible: controller.inProgress == false,
+                      replacement: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            final createProfileParams = CreateProfileParams(
+                              cusName: _nameTEController.text.trim(),
+                              cusAdd: _addressTEController.text.trim(),
+                              cusCity: _cityTEController.text.trim(),
+                              cusState: _stateTEController.text.trim(),
+                              cusPostcode: _postCodeTEController.text.trim(),
+                              cusCountry: _countryTEController.text.trim(),
+                              cusPhone: _phoneTEController.text.trim(),
+                              cusFax: _faxTEController.text.trim(),
+                              shipName: _shipNameTEController.text.trim(),
+                              shipAdd: _shipAddressTEController.text.trim(),
+                              shipCity: _shipCityTEController.text.trim(),
+                              shipState: _shipStateTEController.text.trim(),
+                              shipPostcode:
+                              _shipPostCodeTEController.text.trim(),
+                              shipCountry: _shipCountryTEController.text.trim(),
+                              shipPhone: _shipPhoneTEController.text.trim(),
+                            );
+                            final bool result =
+                            await controller.createProfileData(
+                                Get.find<VerifyOtpController>().token,
+                                createProfileParams);
+                            if (result) {
+                              Get.offAll(() => const MainBottomNavScreen());
+                            } else {
+                              Get.showSnackbar(GetSnackBar(
+                                duration: const Duration(seconds: 2),
+                                isDismissible: true,
+                                title: 'Complete Profile Failed',
+                                message: controller.errorMessage,
+                                backgroundColor: Colors.red,
+                              ));
+                            }
+                          }
+                        },
+                        child: const Text('Complete'),
+                      ),
+                    ),
+                  );
+                })
+              ],
             ),
           ),
         ),
@@ -188,11 +367,21 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
 
   @override
   void dispose() {
-    _firstNameComtroller.dispose();
-    _lastNameController.dispose();
-    _mobileCOntroller.dispose();
-    _cityController.dispose();
-    _shippingAddressController.dispose();
+    _nameTEController.clear();
+    _addressTEController.clear();
+    _cityTEController.clear();
+    _stateTEController.clear();
+    _postCodeTEController.clear();
+    _countryTEController.clear();
+    _phoneTEController.clear();
+    _faxTEController.clear();
+    _shipNameTEController.clear();
+    _shipAddressTEController.clear();
+    _shipCityTEController.clear();
+    _shipStateTEController.clear();
+    _shipPostCodeTEController.clear();
+    _shipCountryTEController.clear();
+    _shipPhoneTEController.clear();
     super.dispose();
   }
 }

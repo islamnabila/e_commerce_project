@@ -7,10 +7,11 @@ import '../utility/app_colors.dart';
 
 class ProductCardItem extends StatelessWidget {
   const ProductCardItem({
-    super.key, required this.product,
+    super.key, required this.product, this.addToWishList = true,
   });
 
   final ProductModel product;
+  final bool addToWishList;
 
   @override
   Widget build(BuildContext context) {
